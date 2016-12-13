@@ -24,7 +24,6 @@ SoftwareSerial mySerial(5, 6); // RX, TX
 
 const int led1 = 8; //yellow led
 const int led2 = 9;  //red led
-const int motorPin = 3; //vibration motor transistor connected to pin 3
 int state = 0; // happy 0 , neutral 1, angry 2
 int laststate = 0;
 
@@ -78,8 +77,6 @@ void setup() {
 
   pinMode(led1, OUTPUT);
   pinMode(led2, OUTPUT);
-  pinMode(motorPin, OUTPUT);
-
   Serial.begin (9600);
   mySerial.begin (9600);
   mp3_set_serial (mySerial);  //set softwareSerial for DFPlayer-mini mp3 module
@@ -106,9 +103,6 @@ void setup() {
   digitalWrite(led2, HIGH);
   delay(1000);
   digitalWrite(led2, LOW);
-  digitalWrite(motorPin, HIGH);
-  delay(1000);
-  digitalWrite(motorPin, LOW);
   delay(5000);
  }
 
@@ -164,11 +158,6 @@ void Changestate() {
     digitalWrite(led2, HIGH);
     digitalWrite(led1, LOW);
     //claims for attention every hour and vibrates
-    if (millis() % (m2 / 2) == 0) {
-      digitalWrite (motorPin, HIGH); //vibrate
-      delay (2500); //during this time
-      digitalWrite (motorPin, LOW); //stop
-    }
   }
 }
 
